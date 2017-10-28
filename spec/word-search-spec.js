@@ -23,3 +23,11 @@ describe("Search every line horizontally", function () {
         expect(wordsearch.getWordsFound()).toEqual(["SCOTTY", "KIRK"]);
     });
 });
+
+describe("Search every line vertically", function () {
+    it("should find the word 'BONES' and 'KHAN'", function () {
+        var wordsearch = new WordSearch('./app/inputFile.txt');
+        wordsearch.searchVertical()
+        expect(wordsearch.getWordsFound()).toEqual(["BONES", "KHAN"]);
+    });
+});

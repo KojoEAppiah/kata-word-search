@@ -47,11 +47,11 @@ class WordSearch {
 
                 }
 
-                if (wordstub.length > length)
-                    length = wordstub.length;
-
-                if (!extend)
+                if (!extend) {
+                    if(x > 0)
+                        x -= wordstub.length - 1;
                     wordstub = "";
+                }
             }
         }
 
@@ -68,13 +68,66 @@ class WordSearch {
 
                 }
 
-                if (!extend)
+                if (!extend) {
+                    if(x < this.search_space -1)
+                        x += wordstub.length - 1;
                     wordstub = "";
+                }
             }
         }
 
     }
 
+    searchVertical() {
+
+        var extend;
+        var wordstub = "";
+        var length = 0;
+
+        for (var x = 0; x < this.search_space.length; x++) {
+            for (var y = 0; y < this.search_space.length; y++) {
+                extend = false;
+                wordstub += this.search_space[y][x];
+                for (var i = 0; i < this.words_to_find.length; i++) {
+                    if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
+                        extend = true;
+                    }
+                    if (this.words_to_find[i] === wordstub)
+                        this.words_found.push(this.words_to_find[i]);
+
+                }
+
+                if (!extend) {
+                    if(y > 0)
+                        y -= wordstub.length - 1;
+                    wordstub = "";
+                }
+            }
+        }
+
+
+        for (var x = 0; x < this.search_space.length; x++) {
+            for (var y = this.search_space.length - 1; y >= 0; y--) {
+                extend = false;
+                wordstub += this.search_space[y][x];
+                for (var i = 0; i < this.words_to_find.length; i++) {
+                    if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
+                        extend = true;
+                    }
+                    if (this.words_to_find[i] === wordstub)
+                        this.words_found.push(this.words_to_find[i]);
+
+                }
+
+                if (!extend) {
+                    if(y < this.search_space -1 )
+                        y += wordstub.length - 1;
+                    wordstub = "";
+                }
+            }
+        }
+
+    }
 }
 
 module.exports = WordSearch;
