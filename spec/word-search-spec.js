@@ -19,7 +19,7 @@ describe("Create a 2 dimensional array of characters to represent the word searc
 describe("Search every line horizontally", function () {
     it("should find the words 'SCOTTY' and 'PICARD'", function () {
         var wordsearch = new WordSearch('./app/inputFile.txt');
-        wordsearch.searchHorizontal()
+        wordsearch.searchHorizontal();
         expect(wordsearch.getWordsFound()).toEqual(["SCOTTY", "KIRK"]);
     });
 });
@@ -27,7 +27,15 @@ describe("Search every line horizontally", function () {
 describe("Search every line vertically", function () {
     it("should find the word 'BONES' and 'KHAN'", function () {
         var wordsearch = new WordSearch('./app/inputFile.txt');
-        wordsearch.searchVertical()
+        wordsearch.searchVertical();
         expect(wordsearch.getWordsFound()).toEqual(["BONES", "KHAN"]);
+    });
+});
+
+describe("Search Every Descending Diagonal Line + Search Backwards", function () {
+    it("should find the words 'SPOCK' and 'SULU'", function () {
+        var wordsearch = new WordSearch('./app/inputFile.txt');
+        wordsearch.searchDescendingDiag();
+        expect(wordsearch.getWordsFound()).toEqual(["SPOCK", "SULU"]);
     });
 });

@@ -69,7 +69,7 @@ class WordSearch {
                 }
 
                 if (!extend) {
-                    if(x < this.search_space -1)
+                    if(x < this.search_space.length -1)
                         x += wordstub.length - 1;
                     wordstub = "";
                 }
@@ -120,13 +120,144 @@ class WordSearch {
                 }
 
                 if (!extend) {
-                    if(y < this.search_space -1 )
+                    if(y < this.search_space.length -1 )
                         y += wordstub.length - 1;
                     wordstub = "";
                 }
             }
         }
 
+    }
+
+    searchDescendingDiag() {
+
+        var x = 0;
+        var y = 0;
+        var extend = false;
+        var wordstub = ""
+
+        //Forwards
+        for (var counter = 0; counter < this.search_space.length-1; counter++) {
+
+            x = counter;
+            y = 0;
+            while (x < this.search_space.length && y < this.search_space.length) {
+
+                extend = false;
+                wordstub += this.search_space[y][x];
+                for (var i = 0; i < this.words_to_find.length; i++) {
+                    if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
+                        extend = true;
+                    }
+                    if (this.words_to_find[i] === wordstub)
+                        this.words_found.push(this.words_to_find[i]);
+
+                }
+
+               // console.log(wordstub);
+                if (!extend) {
+                    if (y < this.search_space.length - 1) {
+                        y -= wordstub.length - 1;
+                        x -= wordstub.length - 1;
+                    }
+                    wordstub = "";
+                }
+                x++;
+                y++;
+            }
+        }
+
+        for (var counter = 0; counter < this.search_space.length - 1; counter++) {
+
+            x = 0;
+            y = counter;
+            while (x < this.search_space.length && y < this.search_space.length) {
+
+                extend = false;
+                wordstub += this.search_space[y][x];
+                for (var i = 0; i < this.words_to_find.length; i++) {
+                    if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
+                        extend = true;
+                    }
+                    if (this.words_to_find[i] === wordstub)
+                        this.words_found.push(this.words_to_find[i]);
+
+                }
+
+                if (!extend) {
+                    if (y < this.search_space.length - 1) {
+                        y -= wordstub.length - 1;
+                        x -= wordstub.length - 1;
+                    }
+                    wordstub = "";
+                }
+                x++;
+                y++;
+            }
+        }
+
+
+        var extend = false;
+        var wordstub = ""
+        //backwards
+        for (var counter = this.search_space.length - 1; counter >= 0; counter--) {
+
+            x = counter;
+            y = this.search_space.length - 1;;
+            while (x >= 0 && y >= 0) {
+
+                extend = false;
+                wordstub += this.search_space[y][x];
+                for (var i = 0; i < this.words_to_find.length; i++) {
+                    if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
+                        extend = true;
+                    }
+                    if (this.words_to_find[i] === wordstub)
+                        this.words_found.push(this.words_to_find[i]);
+
+                }
+
+                // console.log(wordstub);
+                if (!extend) {
+                    if (y < this.search_space.length - 1) {
+                        y += wordstub.length - 1;
+                        x += wordstub.length - 1;
+                    }
+                    wordstub = "";
+                }
+                x--;
+                y--;
+            }
+        }
+
+        for (var counter = 0; counter < this.search_space.length - 1; counter++) {
+
+            x = this.search_space.length - 1;
+            y = counter;
+            while (x > counter && y >= 0) {
+
+                extend = false;
+                wordstub += this.search_space[y][x];
+                for (var i = 0; i < this.words_to_find.length; i++) {
+                    if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
+                        extend = true;
+                    }
+                    if (this.words_to_find[i] === wordstub)
+                        this.words_found.push(this.words_to_find[i]);
+
+                }
+
+                if (!extend) {
+                    if (y < this.search_space.length - 1) {
+                        y += wordstub.length - 1;
+                        x += wordstub.length - 1;
+                    }
+                    wordstub = "";
+                }
+                x--;
+                y--;
+            }
+        }
     }
 }
 
