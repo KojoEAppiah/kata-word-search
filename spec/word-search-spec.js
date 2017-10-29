@@ -48,7 +48,7 @@ describe("Search Every Ascending Diagonal Line + Search Backwards", function () 
     });
 });
 
-describe("Assing Letter Coordinates for Each Word", function () {
+describe("Assigning Letter Coordinates for Each Word", function () {
     it("should return a full list of all words and their letter coordinates'", function () {
         var wordsearch = new WordSearch('./app/inputFile.txt');
 
