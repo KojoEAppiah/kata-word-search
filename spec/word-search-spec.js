@@ -39,3 +39,11 @@ describe("Search Every Descending Diagonal Line + Search Backwards", function ()
         expect(wordsearch.getWordsFound()).toEqual(["SPOCK", "SULU"]);
     });
 });
+
+describe("Search Every Ascending Diagonal Line + Search Backwards", function () {
+    it("should find the word 'UHURA'", function () {
+        var wordsearch = new WordSearch('./app/inputFile.txt');
+        wordsearch.searchAscendingDiag();
+        expect(wordsearch.getWordsFound()).toEqual(["UHURA"]);
+    });
+});
