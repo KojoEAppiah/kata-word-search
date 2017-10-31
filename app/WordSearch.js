@@ -88,13 +88,15 @@ class WordSearch {
                     }
                 }
 
+                if (x == this.search_space.length - 1) { //reached end of line
+                    wordstub = ""
+                }
+
                 if (!extend) {
                     if(x > 0)
                         x -= wordstub.length - 1;
                     wordstub = "";
                 }
-                else
-                    console.log(wordstub)
             }
         }
 
@@ -120,6 +122,10 @@ class WordSearch {
                         this.word_coordinates[wordstub] = temp_word_coordinates;
                     }
 
+                }
+
+                if (x == 0) { //reached end of line
+                    wordstub = ""
                 }
 
                 if (!extend) {
@@ -163,6 +169,10 @@ class WordSearch {
 
                 }
 
+                if (y == this.search_space.length - 1) { //reached end of line
+                    wordstub = ""
+                }
+
                 if (!extend) {
                     if(y > 0)
                         y -= wordstub.length - 1;
@@ -194,6 +204,10 @@ class WordSearch {
                         this.word_coordinates[wordstub] = temp_word_coordinates;
                     }
 
+                }
+
+                if (y == 0) { //reached end of line
+                    wordstub = ""
                 }
 
                 if (!extend) {
@@ -243,6 +257,10 @@ class WordSearch {
 
                 }
 
+                if (x == this.search_space.length - 1) { //reached end of line
+                    wordstub = ""
+                }
+
                 if (!extend) {
                     if (y < this.search_space.length - 1) {
                         y -= wordstub.length - 1;
@@ -282,6 +300,10 @@ class WordSearch {
                         this.word_coordinates[wordstub] = temp_word_coordinates;
                     }
 
+                }
+
+                if (y == this.search_space.length - 1) { //reached end of line
+                    wordstub = ""
                 }
 
                 if (!extend) {
@@ -328,6 +350,10 @@ class WordSearch {
 
                 }
 
+                if (x == 0) { //reached end of line
+                    wordstub = ""
+                }
+
                 if (!extend) {
                     if (y < this.search_space.length - 1) {
                         y += wordstub.length - 1;
@@ -367,6 +393,10 @@ class WordSearch {
                         this.word_coordinates[wordstub] = temp_word_coordinates;
                     }
 
+                }
+
+                if (y == 0) { //reached end of line
+                    wordstub = ""
                 }
 
                 if (!extend) {
@@ -419,6 +449,10 @@ class WordSearch {
 
                 }
 
+                if (y == 0) { //reached end of line
+                    wordstub = ""
+                }
+
                 if (!extend) {
                     if (y < this.search_space.length - 1) {
                         y += wordstub.length - 1;
@@ -458,6 +492,10 @@ class WordSearch {
                         this.word_coordinates[wordstub] = temp_word_coordinates;
                     }
 
+                }
+
+                if (x == this.search_space.length - 1) { //reached end of line
+                    wordstub = ""
                 }
 
                 if (!extend) {
@@ -506,6 +544,10 @@ class WordSearch {
 
                 }
 
+                if (x == 0) { //reached end of line
+                    wordstub = ""
+                }
+
                 if (!extend) {
                     if (y < this.search_space.length - 1) {
                         y += wordstub.length - 1;
@@ -545,6 +587,10 @@ class WordSearch {
                         this.word_coordinates[wordstub] = temp_word_coordinates;
                     }
 
+                }
+
+                if (x == 0) { //reached end of line
+                    wordstub = ""
                 }
 
                 if (!extend) {
