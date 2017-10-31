@@ -93,6 +93,8 @@ class WordSearch {
                         x -= wordstub.length - 1;
                     wordstub = "";
                 }
+                else
+                    console.log(wordstub)
             }
         }
 
@@ -125,6 +127,7 @@ class WordSearch {
                         x += wordstub.length - 1;
                     wordstub = "";
                 }
+
             }
         }
 
@@ -219,7 +222,7 @@ class WordSearch {
 
                 extend = false;
                 wordstub += this.search_space[y][x];
-                for (var i = 0; i < this.words_to_find.length; i++) {
+                for (var i = 0; i < this.words_to_find.length - 1; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
                     }
