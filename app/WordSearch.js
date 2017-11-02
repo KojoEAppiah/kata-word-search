@@ -13,8 +13,8 @@ class WordSearch {
 
 
         this.search_space = file.substr(file.indexOf("\n") + 1, file.length);
-        this.search_space = this.search_space.replace(/,/g, "");
-        this.search_space = this.search_space.split("\r\n");
+        this.search_space = this.search_space.replace(/[, ]/g, "");
+        this.search_space = this.search_space.split("\n");
 
     }
 
@@ -84,12 +84,12 @@ class WordSearch {
                             temp_word_coordinates.push(letter);
                         }
 
-                            this.word_coordinates[wordstub] = temp_word_coordinates;
+                        this.word_coordinates[wordstub] = temp_word_coordinates;
                     }
                 }
 
                 if (x == this.search_space.length - 1) { //reached end of line
-                    wordstub = ""
+                    wordstub = "";
                 }
 
                 if (!extend) {
@@ -100,6 +100,7 @@ class WordSearch {
             }
         }
 
+        //Backwards
         for (var y = 0; y < this.search_space.length; y++) {
             for (var x = this.search_space.length - 1; x >= 0; x--) {
                 extend = false;
@@ -181,6 +182,7 @@ class WordSearch {
             }
         }
 
+        //Backwards
 
         for (var x = 0; x < this.search_space.length; x++) {
             for (var y = this.search_space.length - 1; y >= 0; y--) {
