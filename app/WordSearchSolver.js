@@ -1,6 +1,6 @@
 fs = require('fs')
 
-class WordSearch {
+class WordSearchSolver {
 
     constructor(inputFile) {
 
@@ -12,9 +12,11 @@ class WordSearch {
         this.words_to_find = this.words_to_find.split(",");
 
 
-        this.search_space = file.substr(file.indexOf("\n") + 1, file.length);
-        this.search_space = this.search_space.replace(/[, ]/g, "");
-        this.search_space = this.search_space.split("\n");
+        this.word_search = file.substr(file.indexOf("\n") + 1, file.length);
+        this.word_search = this.word_search.replace("\r", "");
+        this.word_search = this.word_search.replace(/[, ]/g, "");
+        this.word_search = this.word_search.split("\n");
+        
 
     }
 
@@ -26,8 +28,8 @@ class WordSearch {
         return this.words_to_find;
     }
 
-    searchSpace() {
-        return this.search_space;
+    getWordSearch() {
+        return this.word_search;
     }
 
     getWordsFound() {
@@ -60,15 +62,15 @@ class WordSearch {
     }
 
     searchHorizontal() {
-
+        
         var extend;
         var wordstub = "";
         var length = 0;
 
-        for(var y = 0; y < this.search_space.length; y++) {
-            for (var x = 0; x < this.search_space.length; x++) {
+        for(var y = 0; y < this.word_search.length; y++) {
+            for (var x = 0; x < this.word_search.length; x++) {
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -88,7 +90,7 @@ class WordSearch {
                     }
                 }
 
-                if (x == this.search_space.length - 1) { //reached end of line
+                if (x == this.word_search.length - 1) { //reached end of line
                     wordstub = "";
                 }
 
@@ -101,10 +103,10 @@ class WordSearch {
         }
 
         //Backwards
-        for (var y = 0; y < this.search_space.length; y++) {
-            for (var x = this.search_space.length - 1; x >= 0; x--) {
+        for (var y = 0; y < this.word_search.length; y++) {
+            for (var x = this.word_search.length - 1; x >= 0; x--) {
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -130,7 +132,7 @@ class WordSearch {
                 }
 
                 if (!extend) {
-                    if(x < this.search_space.length -1)
+                    if(x < this.word_search.length -1)
                         x += wordstub.length - 1;
                     wordstub = "";
                 }
@@ -146,10 +148,10 @@ class WordSearch {
         var wordstub = "";
         var length = 0;
 
-        for (var x = 0; x < this.search_space.length; x++) {
-            for (var y = 0; y < this.search_space.length; y++) {
+        for (var x = 0; x < this.word_search.length; x++) {
+            for (var y = 0; y < this.word_search.length; y++) {
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -170,7 +172,7 @@ class WordSearch {
 
                 }
 
-                if (y == this.search_space.length - 1) { //reached end of line
+                if (y == this.word_search.length - 1) { //reached end of line
                     wordstub = ""
                 }
 
@@ -184,10 +186,10 @@ class WordSearch {
 
         //Backwards
 
-        for (var x = 0; x < this.search_space.length; x++) {
-            for (var y = this.search_space.length - 1; y >= 0; y--) {
+        for (var x = 0; x < this.word_search.length; x++) {
+            for (var y = this.word_search.length - 1; y >= 0; y--) {
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -213,7 +215,7 @@ class WordSearch {
                 }
 
                 if (!extend) {
-                    if(y < this.search_space.length -1 )
+                    if(y < this.word_search.length -1 )
                         y += wordstub.length - 1;
                     wordstub = "";
                 }
@@ -230,14 +232,14 @@ class WordSearch {
         var wordstub = ""
 
         //Forwards
-        for (var counter = 0; counter < this.search_space.length-1; counter++) {
+        for (var counter = 0; counter < this.word_search.length-1; counter++) {
 
             x = counter;
             y = 0;
-            while (x < this.search_space.length && y < this.search_space.length) {
+            while (x < this.word_search.length && y < this.word_search.length) {
 
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length - 1; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -259,12 +261,12 @@ class WordSearch {
 
                 }
 
-                if (x == this.search_space.length - 1) { //reached end of line
+                if (x == this.word_search.length - 1) { //reached end of line
                     wordstub = ""
                 }
 
                 if (!extend) {
-                    if (y < this.search_space.length - 1) {
+                    if (y < this.word_search.length - 1) {
                         y -= wordstub.length - 1;
                         x -= wordstub.length - 1;
                     }
@@ -275,14 +277,14 @@ class WordSearch {
             }
         }
 
-        for (var counter = 0; counter < this.search_space.length - 1; counter++) {
+        for (var counter = 0; counter < this.word_search.length - 1; counter++) {
 
             x = 0;
             y = counter;
-            while (x < this.search_space.length && y < this.search_space.length) {
+            while (x < this.word_search.length && y < this.word_search.length) {
 
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -304,12 +306,12 @@ class WordSearch {
 
                 }
 
-                if (y == this.search_space.length - 1) { //reached end of line
+                if (y == this.word_search.length - 1) { //reached end of line
                     wordstub = ""
                 }
 
                 if (!extend) {
-                    if (y < this.search_space.length - 1) {
+                    if (y < this.word_search.length - 1) {
                         y -= wordstub.length - 1;
                         x -= wordstub.length - 1;
                     }
@@ -323,14 +325,14 @@ class WordSearch {
         //backwards
         var extend = false;
         var wordstub = ""
-        for (var counter = this.search_space.length - 1; counter >= 0; counter--) {
+        for (var counter = this.word_search.length - 1; counter >= 0; counter--) {
 
             x = counter;
-            y = this.search_space.length - 1;;
+            y = this.word_search.length - 1;;
             while (x >= 0 && y >= 0) {
 
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -357,7 +359,7 @@ class WordSearch {
                 }
 
                 if (!extend) {
-                    if (y < this.search_space.length - 1) {
+                    if (y < this.word_search.length - 1) {
                         y += wordstub.length - 1;
                         x += wordstub.length - 1;
                     }
@@ -368,14 +370,14 @@ class WordSearch {
             }
         }
 
-        for (var counter = 0; counter < this.search_space.length - 1; counter++) {
+        for (var counter = 0; counter < this.word_search.length - 1; counter++) {
 
-            x = this.search_space.length - 1;
+            x = this.word_search.length - 1;
             y = counter;
             while (x > counter && y >= 0) {
 
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -402,7 +404,7 @@ class WordSearch {
                 }
 
                 if (!extend) {
-                    if (y < this.search_space.length - 1) {
+                    if (y < this.word_search.length - 1) {
                         y += wordstub.length - 1;
                         x += wordstub.length - 1;
                     }
@@ -422,14 +424,14 @@ class WordSearch {
         var wordstub = ""
 
         //Forwards
-        for (var counter = 0; counter < this.search_space.length - 1; counter++) {
+        for (var counter = 0; counter < this.word_search.length - 1; counter++) {
 
             x = 0;
             y = counter;
-            while (x < this.search_space.length -1 && y >= 0  && y < this.search_space.length - 1) {
+            while (x < this.word_search.length -1 && y >= 0  && y < this.word_search.length - 1) {
 
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -456,7 +458,7 @@ class WordSearch {
                 }
 
                 if (!extend) {
-                    if (y < this.search_space.length - 1) {
+                    if (y < this.word_search.length - 1) {
                         y += wordstub.length - 1;
                         x -= wordstub.length - 1;
                     }
@@ -467,14 +469,14 @@ class WordSearch {
             }
         }
 
-        for (var counter = 0; counter < this.search_space.length - 1; counter++) {
+        for (var counter = 0; counter < this.word_search.length - 1; counter++) {
 
             x = counter;
-            y = this.search_space.length - 1;
-            while (x < this.search_space.length && y >= 0) {
+            y = this.word_search.length - 1;
+            while (x < this.word_search.length && y >= 0) {
 
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -496,12 +498,12 @@ class WordSearch {
 
                 }
 
-                if (x == this.search_space.length - 1) { //reached end of line
+                if (x == this.word_search.length - 1) { //reached end of line
                     wordstub = ""
                 }
 
                 if (!extend) {
-                    if (y < this.search_space.length - 1) {
+                    if (y < this.word_search.length - 1) {
                         y += wordstub.length - 1;
                         x -= wordstub.length - 1;
                     }
@@ -516,15 +518,15 @@ class WordSearch {
         
         var extend = false;
         var wordstub = ""
-        for (var counter = 0; counter < this.search_space.length; counter++) {
+        for (var counter = 0; counter < this.word_search.length; counter++) {
 
-            x = this.search_space.length - 1;
+            x = this.word_search.length - 1;
             y = counter;
 
-            while (x >= 0 && y < this.search_space.length) {
+            while (x >= 0 && y < this.word_search.length) {
 
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -551,7 +553,7 @@ class WordSearch {
                 }
 
                 if (!extend) {
-                    if (y < this.search_space.length - 1) {
+                    if (y < this.word_search.length - 1) {
                         y += wordstub.length - 1;
                         x -= wordstub.length - 1;
                     }
@@ -562,14 +564,14 @@ class WordSearch {
             }
         }
 
-        for (var counter = this.search_space.length - 1; counter >= 0; counter--) {
+        for (var counter = this.word_search.length - 1; counter >= 0; counter--) {
 
             x = counter;
             y = 0;
-            while (x >= 0 && y < this.search_space.length && y >= 0) {
+            while (x >= 0 && y < this.word_search.length && y >= 0) {
 
                 extend = false;
-                wordstub += this.search_space[y][x];
+                wordstub += this.word_search[y][x];
                 for (var i = 0; i < this.words_to_find.length; i++) {
                     if (this.words_to_find[i].substr(0, wordstub.length) === wordstub) {
                         extend = true;
@@ -596,7 +598,7 @@ class WordSearch {
                 }
 
                 if (!extend) {
-                    if (y < this.search_space.length - 1) {
+                    if (y < this.word_search.length - 1) {
                         y -= wordstub.length - 1;
                         x += wordstub.length - 1;
                     }
@@ -609,4 +611,4 @@ class WordSearch {
     }
 }
 
-module.exports = WordSearch;
+module.exports = WordSearchSolver;
